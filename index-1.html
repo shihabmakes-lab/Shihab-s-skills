@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shihab — Creator & Builder</title>
+<meta name="description" content="Portfolio of Shihab — Discord systems, AI-powered video, and web builds." />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #FFFFFF;
+    --ink: #0E0E12;
+    --red: #E8392E;
+    --red-dark: #C42A20;
+    --surface: #F4F4F6;
+    --surface-2: #EAEAED;
+    --mid: #8A8A93;
+    --line: #E6E6E9;
+    --radius: 20px;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    overflow-x:hidden;
+    cursor: default;
+  }
+
+  ::selection{ background:var(--red); color:#fff; }
+
+  h1,h2,h3,.display{
+    font-family:'Space Grotesk', sans-serif;
+    letter-spacing:-0.02em;
+  }
+
+  .mono{
+    font-family:'JetBrains Mono', monospace;
+    letter-spacing: 0.01em;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  .wrap{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position: fixed;
+    top:0; left:0; right:0;
+    z-index: 100;
+    background: rgba(255,255,255,0.78);
+    backdrop-filter: blur(14px) saturate(1.4);
+    -webkit-backdrop-filter: blur(14px) saturate(1.4);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner{
+    max-width: 1180px;
+    margin:0 auto;
+    padding: 18px 32px;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+  }
+  .logo{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size: 20px;
+  }
+  .logo span{ color: var(--red); }
+  .nav-links{
+    display:flex;
+    gap: 32px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .nav-links a{
+    opacity:0.7;
+    transition: opacity .2s ease;
+    position:relative;
+  }
+  .nav-links a:hover{ opacity:1; }
+  .nav-cta{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 13px;
+    background: var(--ink);
+    color:#fff;
+    padding: 9px 18px;
+    border-radius: 100px;
+    transition: background .2s ease, transform .2s ease;
+  }
+  .nav-cta:hover{ background: var(--red); transform: translateY(-1px); }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height: 100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding-top: 90px;
+    overflow:hidden;
+  }
+
+  .hero-eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 22px;
+    display:flex;
+    align-items:center;
+    gap: 8px;
+  }
+  .hero-eyebrow::before{
+    content:'';
+    width:7px; height:7px;
+    border-radius:50%;
+    background: var(--red);
+    display:inline-block;
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{ opacity:1; transform:scale(1); }
+    50%{ opacity:0.4; transform:scale(0.7); }
+  }
+
+  .hero h1{
+    font-size: clamp(40px, 7.4vw, 88px);
+    font-weight: 700;
+    line-height: 0.98;
+    max-width: 1000px;
+  }
+  .hero h1 .accent{ color: var(--red); }
+
+  .hero p.sub{
+    margin-top: 22px;
+    font-size: clamp(16px, 2vw, 19px);
+    color: var(--mid);
+    max-width: 560px;
+    line-height: 1.55;
+  }
+
+  .hero-actions{
+    margin-top: 36px;
+    display:flex;
+    gap: 14px;
+  }
+  .btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 14px;
+    padding: 14px 26px;
+    border-radius: 100px;
+    display:inline-flex;
+    align-items:center;
+    gap: 8px;
+    transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease, background .25s ease;
+  }
+  .btn-primary{
+    background: var(--red);
+    color:#fff;
+    box-shadow: 0 8px 24px -8px rgba(232,57,46,0.55);
+  }
+  .btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 12px 28px -8px rgba(232,57,46,0.65); }
+  .btn-ghost{
+    background: var(--surface);
+    color: var(--ink);
+    border: 1px solid var(--line);
+  }
+  .btn-ghost:hover{ background: var(--surface-2); transform: translateY(-2px); }
+
+  /* mascot stage */
+  #mascot-stage{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:1;
+    pointer-events:none;
+  }
+  .hero-content{ position:relative; z-index:2; pointer-events:none; }
+  .hero-content *{ pointer-events:auto; }
+
+  .mascot-caption{
+    position:absolute;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--mid);
+    bottom: 6%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align:center;
+    z-index:3;
+    opacity:0.8;
+  }
+
+  .scroll-cue{
+    position:absolute;
+    bottom: 38px;
+    left:50%;
+    transform: translateX(-50%);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--mid);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    z-index:3;
+  }
+  .scroll-cue .line{
+    width:1px; height: 34px;
+    background: linear-gradient(var(--mid), transparent);
+    animation: scrollline 1.8s ease-in-out infinite;
+  }
+  @keyframes scrollline{
+    0%{ transform: scaleY(0); transform-origin: top; }
+    50%{ transform: scaleY(1); transform-origin: top; }
+    51%{ transform: scaleY(1); transform-origin: bottom; }
+    100%{ transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{ position:relative; padding: 140px 0; }
+  .section-head{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    margin-bottom: 64px;
+    gap: 24px;
+    flex-wrap:wrap;
+  }
+  .section-eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--red);
+    text-transform:uppercase;
+    letter-spacing:0.12em;
+    margin-bottom: 14px;
+  }
+  .section-head h2{
+    font-size: clamp(30px, 4vw, 46px);
+    font-weight: 700;
+    max-width: 640px;
+  }
+  .section-head p{
+    color: var(--mid);
+    max-width: 320px;
+    font-size: 15px;
+    line-height:1.6;
+    padding-bottom: 6px;
+  }
+
+  /* ---------- SKILLS GRID ---------- */
+  .skills-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    perspective: 1400px;
+  }
+  .skill-card{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px;
+    transition: transform .15s ease-out, box-shadow .15s ease-out, border-color .2s ease;
+    transform-style: preserve-3d;
+    will-change: transform;
+    position:relative;
+    overflow:hidden;
+  }
+  .skill-card::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(232,57,46,0.10), transparent 60%);
+    opacity:0;
+    transition: opacity .3s ease;
+    pointer-events:none;
+  }
+  .skill-card:hover::before{ opacity:1; }
+  .skill-card:hover{
+    border-color: rgba(232,57,46,0.35);
+    box-shadow: 0 24px 48px -20px rgba(14,14,18,0.18);
+  }
+
+  .skill-icon{
+    width: 88px;
+    height: 88px;
+    margin-bottom: 22px;
+    transform: translateZ(30px);
+    position:relative;
+  }
+  .skill-icon canvas{ width:100% !important; height:100% !important; display:block; }
+
+  .skill-card h3{
+    font-size: 19px;
+    font-weight:600;
+    margin-bottom: 8px;
+    transform: translateZ(20px);
+  }
+  .skill-card p{
+    font-size: 14px;
+    color: var(--mid);
+    line-height:1.55;
+    transform: translateZ(20px);
+  }
+  .skill-tag{
+    display:inline-block;
+    margin-top: 16px;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--red);
+    background: rgba(232,57,46,0.08);
+    padding: 5px 10px;
+    border-radius: 100px;
+    transform: translateZ(20px);
+  }
+
+  /* ---------- ABOUT / STRIP ---------- */
+  .about-section{ background: var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .about-grid{
+    display:grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 80px;
+    align-items:center;
+  }
+  .about-text p{
+    font-size: clamp(18px,2.4vw,26px);
+    line-height:1.5;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:500;
+  }
+  .about-text p .red{ color: var(--red); }
+  .about-meta{
+    margin-top: 40px;
+    display:flex;
+    gap: 40px;
+  }
+  .about-meta div .num{
+    font-family:'Space Grotesk', sans-serif;
+    font-size: 34px;
+    font-weight:700;
+  }
+  .about-meta div .label{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--mid);
+    margin-top:4px;
+  }
+  .about-visual{
+    aspect-ratio: 1;
+    border-radius: var(--radius);
+    background: #fff;
+    border:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+  }
+  #about-canvas{ width:100%; height:100%; display:block; }
+
+  /* ---------- PROCESS / TOOLKIT STRIP ---------- */
+  .marquee{
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding: 26px 0;
+    overflow:hidden;
+    white-space:nowrap;
+  }
+  .marquee-track{
+    display:inline-flex;
+    gap: 56px;
+    animation: marquee 28s linear infinite;
+  }
+  .marquee-track span{
+    font-family:'Space Grotesk', sans-serif;
+    font-size: 22px;
+    font-weight:600;
+    color: var(--mid);
+    display:inline-flex;
+    align-items:center;
+    gap: 56px;
+  }
+  .marquee-track span em{
+    font-style:normal;
+    color: var(--ink);
+  }
+  .marquee-track span::after{
+    content:'◆';
+    color: var(--red);
+    font-size: 12px;
+    margin-left: 56px;
+  }
+  @keyframes marquee{
+    from{ transform: translateX(0); }
+    to{ transform: translateX(-50%); }
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact-section{
+    text-align:center;
+    padding: 160px 0 120px;
+  }
+  .contact-section h2{
+    font-size: clamp(34px, 6vw, 64px);
+    font-weight:700;
+    max-width: 760px;
+    margin: 0 auto;
+    line-height:1.05;
+  }
+  .contact-section h2 .red{ color:var(--red); }
+  .contact-section p{
+    margin-top: 22px;
+    color: var(--mid);
+    font-size: 17px;
+  }
+  .contact-actions{
+    margin-top: 40px;
+    display:flex;
+    justify-content:center;
+    gap: 14px;
+  }
+
+  footer{
+    border-top: 1px solid var(--line);
+    padding: 28px 0;
+  }
+  .footer-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--mid);
+  }
+  .footer-inner a{ opacity:0.7; transition:opacity .2s; }
+  .footer-inner a:hover{ opacity:1; color:var(--red); }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 860px){
+    .nav-links{ display:none; }
+    .skills-grid{ grid-template-columns: repeat(2, 1fr); }
+    .about-grid{ grid-template-columns: 1fr; gap: 48px; }
+    .about-visual{ aspect-ratio: 16/10; order:-1; }
+  }
+  @media (max-width: 560px){
+    .skills-grid{ grid-template-columns: 1fr; }
+    .wrap{ padding: 0 20px; }
+    .about-meta{ gap:24px; flex-wrap:wrap; }
+    section{ padding: 90px 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior:auto !important; }
+  }
+
+  :focus-visible{
+    outline: 2px solid var(--red);
+    outline-offset: 3px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">shihab<span>.</span>dev</div>
+    <div class="nav-links">
+      <a href="#skills">Skills</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="nav-cta">Let's talk →</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div id="mascot-stage"></div>
+  <div class="hero-content wrap">
+    <div class="hero-eyebrow">Available for freelance work</div>
+    <h1>I build <span class="accent">digital things</span><br/>that feel alive.</h1>
+    <p class="sub">Discord systems, AI-generated video, and websites — built by Shihab, 21. Self-taught, internet-raised, always shipping.</p>
+    <div class="hero-actions">
+      <a href="#skills" class="btn btn-primary">See my skills</a>
+      <a href="#contact" class="btn btn-ghost">Get in touch</a>
+    </div>
+  </div>
+  <div class="mascot-caption">move your cursor — he's watching</div>
+  <div class="scroll-cue"><span>Scroll</span><div class="line"></div></div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">What I do</div>
+        <h2>One person, a few crafts, all shipped end-to-end.</h2>
+      </div>
+      <p>Every skill below is something I use for real client work — not a list of buzzwords.</p>
+    </div>
+
+    <div class="skills-grid" id="skills-grid">
+      <!-- cards injected by JS -->
+    </div>
+  </div>
+</section>
+
+<section class="about-section" id="about">
+  <div class="wrap about-grid">
+    <div class="about-text">
+      <p>I'm <span class="red">Shihab</span> — 21 years old, building a freelance career from scratch around AI tools, Discord ecosystems, and the web. <span class="red">No CS degree, no shortcuts</span> — just a lot of late nights turning "I have no idea how" into shipped work.</p>
+      <div class="about-meta">
+        <div>
+          <div class="num">5+</div>
+          <div class="label">CORE SKILLS</div>
+        </div>
+        <div>
+          <div class="num">21</div>
+          <div class="label">YEARS OLD</div>
+        </div>
+        <div>
+          <div class="num">100%</div>
+          <div class="label">SELF-TAUGHT</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual">
+      <div id="about-canvas"></div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span><em>Discord</em> Bot Setup</span>
+    <span><em>Server</em> Moderation</span>
+    <span><em>AI</em> Video Generation</span>
+    <span>Web <em>Development</em></span>
+    <span>Thumbnail <em>Design</em></span>
+    <span><em>Video</em> Editing</span>
+    <span><em>Discord</em> Bot Setup</span>
+    <span><em>Server</em> Moderation</span>
+    <span><em>AI</em> Video Generation</span>
+    <span>Web <em>Development</em></span>
+    <span>Thumbnail <em>Design</em></span>
+    <span><em>Video</em> Editing</span>
+  </div>
+</div>
+
+<section class="contact-section" id="contact">
+  <div class="wrap">
+    <h2>Got something to build?<br/><span class="red">Let's make it real.</span></h2>
+    <p>Open to freelance projects — Discord setups, AI video, websites, design.</p>
+    <div class="contact-actions">
+      <a href="mailto:helenabegamh@gmail.com" class="btn btn-primary">Email me</a>
+      <a href="#" class="btn btn-ghost">Discord</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span>© 2026 Shihab</span>
+    <span>Built with JavaScript &amp; Three.js</span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
+<script>
+/* THREE is loaded globally via the script tag above */
+
+/* =========================================================
+   SHARED HELPERS
+========================================================= */
+function makeRenderer(canvasParent, alpha = true){
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  canvasParent.appendChild(renderer.domElement);
+  return renderer;
+}
+
+function resizeRendererToParent(renderer, camera, parent){
+  const w = parent.clientWidth;
+  const h = parent.clientHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+
+const COLORS = {
+  red: 0xE8392E,
+  redDark: 0xC42A20,
+  ink: 0x0E0E12,
+  white: 0xFFFFFF,
+  grey: 0xD8D8DC,
+  midGrey: 0xB7B7BD
+};
+
+/* =========================================================
+   1. HERO MASCOT — kid w/ red cap, white body, black hair,
+      hovers and follows cursor with parallax + tilt.
+      Built from primitives as a stylized stand-in. Swap with
+      a GLB later by editing buildMascot().
+========================================================= */
+function initMascot(){
+  const stage = document.getElementById('mascot-stage');
+  const scene = new THREE.Scene();
+
+  const camera = new THREE.PerspectiveCamera(38, stage.clientWidth / stage.clientHeight, 0.1, 100);
+  camera.position.set(0, 0.2, 7);
+
+  const renderer = makeRenderer(stage);
+  renderer.shadowMap.enabled = false;
+
+  // lights — soft, bright, white-background friendly
+  const key = new THREE.DirectionalLight(0xffffff, 2.0);
+  key.position.set(3, 5, 5);
+  scene.add(key);
+
+  const fill = new THREE.DirectionalLight(0xffffff, 0.8);
+  fill.position.set(-4, 2, 3);
+  scene.add(fill);
+
+  const rim = new THREE.DirectionalLight(0xE8392E, 0.5);
+  rim.position.set(0, -2, -4);
+  scene.add(rim);
+
+  const ambient = new THREE.AmbientLight(0xffffff, 0.55);
+  scene.add(ambient);
+
+  // soft contact shadow (a translucent dark ellipse) for grounding feel
+  const shadowGeo = new THREE.CircleGeometry(1.15, 48);
+  const shadowMat = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.07 });
+  const shadowMesh = new THREE.Mesh(shadowGeo, shadowMat);
+  shadowMesh.rotation.x = -Math.PI / 2;
+  shadowMesh.position.y = -2.05;
+  scene.add(shadowMesh);
+
+  const mascot = buildMascot();
+  scene.add(mascot.group);
+
+  function buildMascot(){
+    const group = new THREE.Group();
+
+    const skinMat = new THREE.MeshStandardMaterial({ color: COLORS.white, roughness: 0.55, metalness: 0.05 });
+    const hairMat = new THREE.MeshStandardMaterial({ color: 0x111114, roughness: 0.4, metalness: 0.1 });
+    const capMat  = new THREE.MeshStandardMaterial({ color: COLORS.red, roughness: 0.45, metalness: 0.1 });
+    const capDarkMat = new THREE.MeshStandardMaterial({ color: COLORS.redDark, roughness: 0.45, metalness: 0.1 });
+    const eyeMat = new THREE.MeshStandardMaterial({ color: 0x111114, roughness: 0.3 });
+
+    // body (rounded, chibi style — "only his head will be short" -> small/compact proportions)
+    const body = new THREE.Mesh(new THREE.CapsuleGeometry(0.62, 0.55, 8, 24), skinMat);
+    body.position.y = -0.55;
+    group.add(body);
+
+    // arms
+    const armGeo = new THREE.CapsuleGeometry(0.16, 0.55, 6, 16);
+    const armL = new THREE.Mesh(armGeo, skinMat);
+    armL.position.set(-0.78, -0.55, 0);
+    armL.rotation.z = 0.35;
+    group.add(armL);
+    const armR = armL.clone();
+    armR.position.x = 0.78;
+    armR.rotation.z = -0.35;
+    group.add(armR);
+
+    // head group (compact / short)
+    const headGroup = new THREE.Group();
+    headGroup.position.y = 0.55;
+    group.add(headGroup);
+
+    const head = new THREE.Mesh(new THREE.SphereGeometry(0.62, 32, 32), skinMat);
+    headGroup.add(head);
+
+    // hair (back shell, peeking under cap)
+    const hair = new THREE.Mesh(new THREE.SphereGeometry(0.64, 32, 32, 0, Math.PI * 2, 0, Math.PI * 0.62), hairMat);
+    hair.position.y = 0.05;
+    hair.rotation.x = Math.PI;
+    headGroup.add(hair);
+
+    // eyes (simple, friendly, slightly large = stylized/cute)
+    const eyeGeo = new THREE.SphereGeometry(0.07, 16, 16);
+    const eyeL = new THREE.Mesh(eyeGeo, eyeMat);
+    eyeL.position.set(-0.22, -0.02, 0.54);
+    headGroup.add(eyeL);
+    const eyeR = eyeL.clone();
+    eyeR.position.x = 0.22;
+    headGroup.add(eyeR);
+
+    // small smile (torus arc)
+    const smileGeo = new THREE.TorusGeometry(0.13, 0.018, 8, 24, Math.PI);
+    const smile = new THREE.Mesh(smileGeo, eyeMat);
+    smile.position.set(0, -0.18, 0.56);
+    smile.rotation.x = Math.PI * 0.92;
+    headGroup.add(smile);
+
+    // cap — crown
+    const capCrown = new THREE.Mesh(new THREE.SphereGeometry(0.66, 32, 32, 0, Math.PI * 2, 0, Math.PI * 0.52), capMat);
+    capCrown.position.y = 0.12;
+    headGroup.add(capCrown);
+
+    // cap — brim
+    const brimGeo = new THREE.CylinderGeometry(0.42, 0.42, 0.06, 32, 1, false, 0, Math.PI);
+    const brim = new THREE.Mesh(brimGeo, capDarkMat);
+    brim.position.set(0, 0.18, 0.58);
+    brim.rotation.x = -0.12;
+    headGroup.add(brim);
+
+    // cap button on top
+    const button = new THREE.Mesh(new THREE.SphereGeometry(0.05, 12, 12), capDarkMat);
+    button.position.set(0, 0.65, 0);
+    headGroup.add(button);
+
+    group.scale.setScalar(0.85);
+    group.position.y = -0.2;
+
+    return { group, headGroup, armL, armR };
+  }
+
+  /* ---- interaction state ---- */
+  const pointer = { x: 0, y: 0 };       // normalized -1..1
+  const target = { x: 0, y: 0 };
+  let scrollFactor = 0;
+
+  window.addEventListener('pointermove', (e) => {
+    pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
+    pointer.y = (e.clientY / window.innerHeight) * 2 - 1;
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    if (!e.touches || !e.touches[0]) return;
+    const t = e.touches[0];
+    pointer.x = (t.clientX / window.innerWidth) * 2 - 1;
+    pointer.y = (t.clientY / window.innerHeight) * 2 - 1;
+  }, { passive: true });
+
+  window.addEventListener('scroll', () => {
+    const max = document.body.scrollHeight - window.innerHeight;
+    scrollFactor = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+  }, { passive: true });
+
+  const clock = new THREE.Clock();
+
+  function animate(){
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+
+    // smooth-follow easing
+    target.x += (pointer.x - target.x) * 0.06;
+    target.y += (pointer.y - target.y) * 0.06;
+
+    // float (idle hover bob)
+    const bob = Math.sin(t * 1.4) * 0.12;
+    mascot.group.position.y = -0.2 + bob - scrollFactor * 3.2;
+    mascot.group.position.x = target.x * 0.9;
+
+    // body tilts gently toward cursor, head tilts a bit more (look-at feel)
+    mascot.group.rotation.y = target.x * 0.5;
+    mascot.group.rotation.z = -target.x * 0.12;
+    mascot.headGroup.rotation.x = -target.y * 0.35;
+    mascot.headGroup.rotation.y = target.x * 0.25;
+
+    // gentle idle arm sway
+    mascot.armL.rotation.x = Math.sin(t * 1.2) * 0.08;
+    mascot.armR.rotation.x = Math.sin(t * 1.2 + Math.PI) * 0.08;
+
+    // fade + shrink mascot as user scrolls away from hero
+    const s = 0.85 * (1 - scrollFactor * 0.4);
+    mascot.group.scale.setScalar(s);
+    shadowMesh.material.opacity = 0.07 * (1 - scrollFactor);
+    shadowMesh.position.x = mascot.group.position.x;
+
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  window.addEventListener('resize', () => resizeRendererToParent(renderer, camera, stage));
+  resizeRendererToParent(renderer, camera, stage);
+}
+
+/* =========================================================
+   2. SKILL ICONS — small 3D scenes, one per skill card,
+      each with a unique geometric "logo" + slow auto-rotate
+      and a tilt response when the parent card is hovered.
+========================================================= */
+const SKILLS = [
+  {
+    title: 'Discord Bot Setup',
+    desc: 'Configuring and deploying bots — tickets, roles, automation — tuned to how a server actually runs.',
+    tag: 'BOTS',
+    build: (group) => {
+      // stylized "bot head" — rounded cube + antenna + visor
+      const body = new THREE.Mesh(
+        new THREE.BoxGeometry(0.9, 0.8, 0.8),
+        new THREE.MeshStandardMaterial({ color: COLORS.ink, roughness: 0.4, metalness: 0.3 })
+      );
+      group.add(body);
+      const visor = new THREE.Mesh(
+        new THREE.BoxGeometry(0.66, 0.22, 0.05),
+        new THREE.MeshStandardMaterial({ color: COLORS.red, emissive: COLORS.red, emissiveIntensity: 0.6, roughness: 0.3 })
+      );
+      visor.position.set(0, 0.05, 0.41);
+      group.add(visor);
+      const antenna = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.025, 0.025, 0.4, 8),
+        new THREE.MeshStandardMaterial({ color: COLORS.midGrey, roughness: 0.4, metalness: 0.5 })
+      );
+      antenna.position.set(0, 0.6, 0);
+      group.add(antenna);
+      const tip = new THREE.Mesh(new THREE.SphereGeometry(0.07, 12, 12),
+        new THREE.MeshStandardMaterial({ color: COLORS.red, emissive: COLORS.red, emissiveIntensity: 0.8 }));
+      tip.position.set(0, 0.82, 0);
+      group.add(tip);
+    }
+  },
+  {
+    title: 'Server Moderation',
+    desc: 'Keeping communities clean and safe with logging, auto-mod rules, and clear escalation flows.',
+    tag: 'MODERATION',
+    build: (group) => {
+      // shield shape via extrude-ish stack of scaled boxes (lathe avoided for simplicity)
+      const shieldShape = new THREE.Shape();
+      shieldShape.moveTo(-0.5, 0.6);
+      shieldShape.lineTo(0.5, 0.6);
+      shieldShape.lineTo(0.5, 0.0);
+      shieldShape.quadraticCurveTo(0.5, -0.55, 0, -0.75);
+      shieldShape.quadraticCurveTo(-0.5, -0.55, -0.5, 0.0);
+      shieldShape.lineTo(-0.5, 0.6);
+      const geo = new THREE.ExtrudeGeometry(shieldShape, { depth: 0.18, bevelEnabled: true, bevelThickness: 0.03, bevelSize: 0.03, bevelSegments: 3 });
+      geo.center();
+      const shield = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ color: COLORS.red, roughness: 0.4, metalness: 0.15 }));
+      group.add(shield);
+      const check = new THREE.Mesh(
+        new THREE.TorusGeometry(0.16, 0.035, 8, 16, Math.PI * 1.3),
+        new THREE.MeshStandardMaterial({ color: COLORS.white, roughness: 0.3 })
+      );
+      check.rotation.set(0, 0, -0.5);
+      check.position.z = 0.12;
+      group.add(check);
+    }
+  },
+  {
+    title: 'AI Video Generation',
+    desc: 'Producing AI-generated video and commercials — concept, prompt, generate, edit into something usable.',
+    tag: 'AI VIDEO',
+    build: (group) => {
+      // play-button orb with orbiting ring (AI / generative feel)
+      const orb = new THREE.Mesh(
+        new THREE.IcosahedronGeometry(0.5, 1),
+        new THREE.MeshStandardMaterial({ color: COLORS.ink, roughness: 0.25, metalness: 0.4, flatShading: true })
+      );
+      group.add(orb);
+      const ring = new THREE.Mesh(
+        new THREE.TorusGeometry(0.72, 0.025, 8, 48),
+        new THREE.MeshStandardMaterial({ color: COLORS.red, emissive: COLORS.red, emissiveIntensity: 0.4, roughness: 0.3 })
+      );
+      ring.rotation.x = Math.PI / 2.4;
+      group.add(ring);
+      const ring2 = ring.clone();
+      ring2.rotation.x = -Math.PI / 3;
+      ring2.rotation.y = 0.6;
+      ring2.scale.setScalar(0.82);
+      group.add(ring2);
+    }
+  },
+  {
+    title: 'Web Development',
+    desc: 'Building full websites from scratch — front end, structure, interactions — in clean JavaScript.',
+    tag: 'WEB',
+    build: (group) => {
+      // browser window block w/ "code lines"
+      const frame = new THREE.Mesh(
+        new THREE.BoxGeometry(1.0, 0.74, 0.06),
+        new THREE.MeshStandardMaterial({ color: COLORS.ink, roughness: 0.45, metalness: 0.15 })
+      );
+      group.add(frame);
+      const screen = new THREE.Mesh(
+        new THREE.BoxGeometry(0.88, 0.58, 0.02),
+        new THREE.MeshStandardMaterial({ color: COLORS.white, roughness: 0.5 })
+      );
+      screen.position.z = 0.04;
+      group.add(screen);
+      const lineMat = new THREE.MeshStandardMaterial({ color: COLORS.red, roughness: 0.4 });
+      const widths = [0.5, 0.32, 0.42];
+      widths.forEach((w, i) => {
+        const line = new THREE.Mesh(new THREE.BoxGeometry(w, 0.045, 0.02), lineMat);
+        line.position.set(-0.88 / 2 + w / 2 + 0.06, 0.16 - i * 0.16, 0.06);
+        group.add(line);
+      });
+    }
+  },
+  {
+    title: 'Video & Thumbnail Editing',
+    desc: 'Cutting clean edits and high-CTR thumbnails — pacing, color, and a graphic eye for what gets clicks.',
+    tag: 'EDITING',
+    build: (group) => {
+      // film clapper stylized
+      const base = new THREE.Mesh(
+        new THREE.BoxGeometry(0.9, 0.6, 0.08),
+        new THREE.MeshStandardMaterial({ color: COLORS.ink, roughness: 0.4, metalness: 0.2 })
+      );
+      group.add(base);
+      const top = new THREE.Mesh(
+        new THREE.BoxGeometry(0.9, 0.18, 0.08),
+        new THREE.MeshStandardMaterial({ color: COLORS.red, roughness: 0.4 })
+      );
+      top.position.set(0, 0.36, 0);
+      top.rotation.z = 0.22;
+      group.add(top);
+      // stripes on the clapper top
+      for(let i=-2;i<=2;i++){
+        const stripe = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.18, 0.09),
+          new THREE.MeshStandardMaterial({ color: COLORS.white, roughness: 0.4 }));
+        stripe.position.set(i * 0.16, 0.36, 0.001);
+        stripe.rotation.z = 0.22;
+        group.add(stripe);
+      }
+    }
+  },
+  {
+    title: 'AI Tools & Workflows',
+    desc: 'Using AI tools end-to-end — generation, automation, prompting — to move fast without sacrificing quality.',
+    tag: 'AI TOOLS',
+    build: (group) => {
+      // spark / star core with small satellite cubes (tools orbiting a core)
+      const core = new THREE.Mesh(
+        new THREE.OctahedronGeometry(0.42, 0),
+        new THREE.MeshStandardMaterial({ color: COLORS.red, roughness: 0.3, metalness: 0.2, flatShading: true })
+      );
+      group.add(core);
+      const satMat = new THREE.MeshStandardMaterial({ color: COLORS.ink, roughness: 0.4, metalness: 0.2 });
+      const positions = [
+        [0.75, 0.3, 0], [-0.7, -0.2, 0.2], [0.1, -0.55, -0.3]
+      ];
+      positions.forEach(p => {
+        const sat = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.16, 0.16), satMat);
+        sat.position.set(...p);
+        group.add(sat);
+      });
+    }
+  }
+];
+
+function initSkillIcons(){
+  const grid = document.getElementById('skills-grid');
+
+  SKILLS.forEach((skill) => {
+    const card = document.createElement('div');
+    card.className = 'skill-card';
+    card.innerHTML = `
+      <div class="skill-icon"></div>
+      <h3>${skill.title}</h3>
+      <p>${skill.desc}</p>
+      <span class="skill-tag mono">${skill.tag}</span>
+    `;
+    grid.appendChild(card);
+
+    const iconHost = card.querySelector('.skill-icon');
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 20);
+    camera.position.set(0, 0.3, 3.4);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    iconHost.appendChild(renderer.domElement);
+
+    const key = new THREE.DirectionalLight(0xffffff, 1.8);
+    key.position.set(2, 3, 4);
+    scene.add(key);
+    const fill = new THREE.DirectionalLight(0xffffff, 0.7);
+    fill.position.set(-3, -1, 2);
+    scene.add(fill);
+    const amb = new THREE.AmbientLight(0xffffff, 0.6);
+    scene.add(amb);
+
+    const group = new THREE.Group();
+    skill.build(group);
+    scene.add(group);
+
+    let hover = false;
+    card.addEventListener('mouseenter', () => hover = true);
+    card.addEventListener('mouseleave', () => hover = false);
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width;
+      const py = (e.clientY - rect.top) / rect.height;
+      card.style.setProperty('--mx', `${px * 100}%`);
+      card.style.setProperty('--my', `${py * 100}%`);
+      const rotY = (px - 0.5) * 14;
+      const rotX = (py - 0.5) * -14;
+      card.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(0)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+    });
+
+    function size(){
+      const w = iconHost.clientWidth || 88;
+      const h = iconHost.clientHeight || 88;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    size();
+    window.addEventListener('resize', size);
+
+    const ro = new ResizeObserver(size);
+    ro.observe(iconHost);
+
+    function loop(){
+      requestAnimationFrame(loop);
+      group.rotation.y += hover ? 0.025 : 0.008;
+      group.rotation.x = Math.sin(Date.now() * 0.0006) * 0.08;
+      renderer.render(scene, camera);
+    }
+    loop();
+  });
+}
+
+/* =========================================================
+   3. ABOUT SECTION VISUAL — slowly rotating cluster of
+      shapes representing the multidisciplinary skill set.
+========================================================= */
+function initAboutVisual(){
+  const host = document.getElementById('about-canvas');
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(40, host.clientWidth / host.clientHeight, 0.1, 20);
+  camera.position.set(0, 0.5, 5.5);
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  host.appendChild(renderer.domElement);
+
+  const key = new THREE.DirectionalLight(0xffffff, 1.6);
+  key.position.set(3, 4, 4);
+  scene.add(key);
+  const amb = new THREE.AmbientLight(0xffffff, 0.7);
+  scene.add(amb);
+  const rimL = new THREE.DirectionalLight(COLORS.red, 0.6);
+  rimL.position.set(-3, -2, -2);
+  scene.add(rimL);
+
+  const cluster = new THREE.Group();
+  scene.add(cluster);
+
+  const shapeDefs = [
+    { geo: new THREE.IcosahedronGeometry(0.55, 0), color: COLORS.red, pos: [0, 0, 0] },
+    { geo: new THREE.BoxGeometry(0.55, 0.55, 0.55), color: COLORS.ink, pos: [1.15, 0.6, -0.5] },
+    { geo: new THREE.TorusGeometry(0.4, 0.13, 12, 32), color: COLORS.red, pos: [-1.2, -0.4, 0.3] },
+    { geo: new THREE.OctahedronGeometry(0.42, 0), color: COLORS.ink, pos: [0.6, -0.95, 0.6] },
+    { geo: new THREE.SphereGeometry(0.32, 24, 24), color: COLORS.grey, pos: [-0.7, 1.0, 0.7] },
+  ];
+
+  const meshes = shapeDefs.map(d => {
+    const mat = new THREE.MeshStandardMaterial({ color: d.color, roughness: 0.4, metalness: 0.15, flatShading: d.geo.type !== 'SphereGeometry' && d.geo.type !== 'TorusGeometry' });
+    const mesh = new THREE.Mesh(d.geo, mat);
+    mesh.position.set(...d.pos);
+    cluster.add(mesh);
+    return mesh;
+  });
+
+  function size(){
+    const w = host.clientWidth, h = host.clientHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  size();
+  window.addEventListener('resize', size);
+  new ResizeObserver(size).observe(host);
+
+  let pointerX = 0;
+  host.addEventListener('mousemove', (e) => {
+    const rect = host.getBoundingClientRect();
+    pointerX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+  });
+
+  const clock = new THREE.Clock();
+  function loop(){
+    requestAnimationFrame(loop);
+    const t = clock.getElapsedTime();
+    cluster.rotation.y += 0.0035 + pointerX * 0.002;
+    meshes.forEach((m, i) => {
+      m.position.y += Math.sin(t * 0.8 + i) * 0.0009;
+      m.rotation.x += 0.003;
+      m.rotation.y += 0.0022;
+    });
+    renderer.render(scene, camera);
+  }
+  loop();
+}
+
+/* =========================================================
+   INIT
+========================================================= */
+window.addEventListener('DOMContentLoaded', () => {
+  initMascot();
+  initSkillIcons();
+  initAboutVisual();
+});
+</script>
+
+</body>
+</html>
